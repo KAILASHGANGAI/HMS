@@ -7,12 +7,31 @@ use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use Exception;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ExpenseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $expenses = Expense::all();
+
+        if ($request->ajax()) {
+
+            return DataTables()->of($expenses)
+                ->editColumn('bill_Image', function ($row) {
+                    return '<a href="' . asset($row->bill_Image) . '" target="_blank">
+                      <img src="' . asset($row->bill_Image) . '" alt="Bill Image" style="width: 60px; height: 40px">
+                    </a>';
+                })
+                
+                ->addColumn('action', function ($row) {
+
+                    return $this->getEdit($row);
+                })
+                ->addIndexColumn()
+                ->rawColumns(['bill_Image', 'action'])
+                ->make(true);
+            }
         return view('expenses.index', compact('expenses'));
     }
 
@@ -60,5 +79,15 @@ class ExpenseController extends Controller
     
         return redirect()->route('expenses.index')->with('success', 'Expense deleted successfully.');
     }
-    
+    public function getEdit(Expense $expense){
+        $delete = route('expenses.destroy', $expense->id);
+        return '
+          <form action="'.$delete.'" method="POST"
+                                style="display:inline;">
+                              <input type="hidden" name="_method" value="DELETE">
+                              <input type="hidden" name="_token" value="' . csrf_token() . '">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+        ';
+    }
 }

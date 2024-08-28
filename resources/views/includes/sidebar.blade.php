@@ -48,13 +48,13 @@
 
     <!-- Tours Dropdown in Sidebar -->
     <a href="#estimate" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-route"></i> <span class="sidebar-text">Estimates</span>
+        <i class="fas fa-route"></i> <span class="sidebar-text">Contractors</span>
     </a>
     <ul class="collapse list-unstyled" id="estimate">
-        <li><a href="{{ route('users.create') }}" class="ms-4"><i class="fas fa-plus"></i> <span
-                    class="sidebar-text">Add Users</span></a></li>
-        <li><a href="{{ route('users.index') }}" class="ms-4"><i class="fas fa-tasks"></i> <span
-                    class="sidebar-text">User List</span></a></li>
+        <li><a href="{{ route('contractors.create') }}" class="ms-4"><i class="fas fa-plus"></i> <span
+                    class="sidebar-text">Add Contractors</span></a></li>
+        <li><a href="{{ route('contractors.index') }}" class="ms-4"><i class="fas fa-tasks"></i> <span
+                    class="sidebar-text">Contractors List </span></a></li>
     </ul>
     @else
     <a href="#" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

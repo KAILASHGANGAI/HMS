@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContractorController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerExpenseController;
 use App\Http\Controllers\DepositeController;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('expenses', ExpenseController::class);
     Route::resource('deposits', DepositeController::class);
     Route::resource('customer-expenses', CustomerExpenseController::class);
+    Route::resource('contractors', ContractorController::class);
 
 });
 

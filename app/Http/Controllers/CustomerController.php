@@ -76,22 +76,26 @@ class CustomerController extends Controller
     // Update the specified resource in storage
     public function update(Request $request, Customer $customer)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:15',
-            'address' => 'nullable|string|max:255',
-            'status' => 'nullable|integer',
-            'problem' => 'nullable|string',
-            'follow_up_date' => 'nullable|date',
-            'user_id' => 'required|integer',
-            'note' => 'nullable|string',
-            'longitude' => 'nullable|string',
-            'latitude' => 'nullable|string',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'phone' => 'nullable|string',
+                'address' => 'nullable|string|max:255',
+                'status' => 'nullable',
+                'problem' => 'nullable|string',
+                'follow_up_date' => 'nullable|date',
+                'user_id' => 'required|integer',
+                'note' => 'nullable|string',
+                'longitude' => 'nullable|string',
+                'latitude' => 'nullable|string',
+            ]);
 
-        $customer->update($request->all());
+            $customer->update($request->all());
 
-        return redirect()->route('customers.index')->with('success', 'Customer updated successfully.');
+            return redirect()->route('customers.index')->with('success', 'Customer updated successfully.');
+        } catch (Exception $th) {
+            dd($th);
+        }
     }
 
     // Remove the specified resource from storage
@@ -151,9 +155,18 @@ class CustomerController extends Controller
 
                 if (auth()->user()->is_admin) {
                     //edit and delete only 
-                    $editButton = '<button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editcustomerModal-' . $customer->id . '">
-                              <i class="fa-solid fa-pen-to-square"></i>
-                     </button>';
+                    $update = route('customers.edit', $customer->id);
+                    $editButton = '<a href="' . $update . '" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>';
+
+                    $delete = '<form action="' . route('customers.destroy', $customer->id) . '" method="POST" style="display:inline;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="' . csrf_token() . '">
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                    </form>';
+                    $cexp = route('customers.expenses', $customer->id);
+                    $expenseButton = '<a href="' . $cexp . '" class="btn btn-danger btn-sm"><i class="fa-solid fa-money-bill-trend-up"></i> </a>';
+
+                    return $viewBtn . ' ' . $editButton . ' ' . $delete. ' ' . $expenseButton;
                 } else {
 
                     $editButton = '<a href="' . route('customers.sideupdate', $customer->id) . '"  class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>';

@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Expenses</h1>
         <a href="{{ route('expenses.create') }}" class="btn btn-primary">Add Expense</a>
-        <table class="table mt-3">
+        <table class="table mt-3" id="expense-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -16,7 +16,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
                 @foreach ($expenses as $expense)
                     <tr>
                         <td>{{ $expense->id }}</td>
@@ -45,7 +45,49 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#expense-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('expenses.index') }}",
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'description',
+                        name: 'description'
+                    },
+                    {
+                        data: 'amount',
+                        name: 'amount'
+                    },
+                    {
+                        data: 'expense_date',
+                        name: 'expense_date'
+                    },
+                    {
+                        data: 'bill_Image',
+                        name: 'bill_Image'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false
+                    }
+                ]
+            });
+        });
+    </script>
 @endsection
