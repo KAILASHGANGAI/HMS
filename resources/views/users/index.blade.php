@@ -3,6 +3,7 @@
 @section('content')
     <h1>Users
     <a href="{{ route('users.create') }}" class="btn btn-primary my-2">Create New User</a></h1>
+  <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -31,4 +32,5 @@
             @endforeach
         </tbody>
     </table>
+  </div>
 @endsection

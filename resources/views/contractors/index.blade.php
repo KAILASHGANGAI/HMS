@@ -5,6 +5,7 @@
     <h2>Contractors</h2>
     <a href="{{ route('contractors.create') }}" class="btn btn-primary mb-3">Add Contractor</a>
 
+   <div class="table table-responsive">
     <table class="table table-bordered" id="contractors-table">
         <thead>
             <tr>
@@ -21,6 +22,7 @@
         <tbody>
         </tbody>
     </table>
+   </div>
 </div>
 @endsection
 

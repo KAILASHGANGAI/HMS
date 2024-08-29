@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid ">
+      <div class="table table-responsive">
         <table id="customer-table" class="display">
             <thead>
                 <tr>
@@ -16,6 +17,7 @@
 
 
         </table>
+      </div>
     </div>
 @endsection
 
@@ -56,7 +58,8 @@
                         orderable: false,
                         searchable: false
                     },
-                ]
+                ],
+                responsive: true
             });
         });
 

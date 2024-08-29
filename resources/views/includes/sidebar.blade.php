@@ -4,7 +4,7 @@
     @if (auth()->user()->is_admin)
     <!-- Tours Dropdown in Sidebar -->
     <a href="#Deposits" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-route"></i> <span class="sidebar-text">Deposits</span>
+        <i class="fas fa-dollar-sign"></i> <span class="sidebar-text">Deposits</span>
     </a>
     <ul class="collapse list-unstyled" id="Deposits">
 
@@ -13,7 +13,7 @@
     </ul>
     <!-- Tours Dropdown in Sidebar -->
     <a href="#user" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-route"></i> <span class="sidebar-text">Users</span>
+        <i class="fas fa-user"></i> <span class="sidebar-text">Users</span>
     </a>
     <ul class="collapse list-unstyled" id="user">
         <li><a href="{{ route('users.create') }}" class="ms-4"><i class="fas fa-plus"></i> <span
@@ -24,7 +24,7 @@
 
     <!-- Tours Dropdown in Sidebar -->
     <a href="#customer" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-route"></i> <span class="sidebar-text">Customer</span>
+        <i class="fas fa-users"></i> <span class="sidebar-text">Customer</span>
     </a>
     <ul class="collapse list-unstyled" id="customer">
         <li><a href="{{ route('customers.create') }}" class="ms-4"><i class="fas fa-plus"></i> <span
@@ -37,7 +37,7 @@
 
     <!-- Tours Dropdown in Sidebar -->
     <a href="#Expences" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-route"></i> <span class="sidebar-text">Expenses</span>
+        <i class="fas fa-dollar-sign"></i> <span class="sidebar-text">Expenses</span>
     </a>
     <ul class="collapse list-unstyled" id="Expences">
         <li><a href="{{ route('expenses.create') }}" class="ms-4"><i class="fas fa-plus"></i> <span
@@ -48,7 +48,7 @@
 
     <!-- Tours Dropdown in Sidebar -->
     <a href="#estimate" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-route"></i> <span class="sidebar-text">Contractors</span>
+        <i class="fas fa-globe"></i> <span class="sidebar-text">Contractors</span>
     </a>
     <ul class="collapse list-unstyled" id="estimate">
         <li><a href="{{ route('contractors.create') }}" class="ms-4"><i class="fas fa-plus"></i> <span

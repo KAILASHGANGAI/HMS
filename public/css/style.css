@@ -16,7 +16,7 @@ body {
     /* Prevent the image from repeating */
     color: white;
     /* Ensure text is readable on top of the image */
-    height: 100vh;
+    height: 100%;
     /* Make the sidebar full height */
     width: 250px;
     /* Adjust the width of the sidebar as needed */
@@ -31,6 +31,7 @@ body {
     padding-top: 20px;
     z-index: 1000;
     transition: width 0.3s;
+    transform: translateX(0);
 }
 
 .sidebar.minimized {
@@ -132,13 +133,18 @@ body {
 }
 
 @media (max-width: 768px) {
+   
     .sidebar.minimized {
-        display: none;
+        width : 0px;
     }
     .sidebar.minimized~.content {
         margin-left: 0;
     }
-    .navbar>.container-fluid, .navbar>.container-lg, .navbar>.container-md, .navbar>.container-sm, .navbar>.container-xl, .navbar>.container-xxl {
-        justify-content: flex-start;
-    }
+    
+    .content {
+        margin-top: 50px;
+        margin-left: 0;
+        padding: 20px;
+        transition: margin-left 0.3s;
+    }   
 }

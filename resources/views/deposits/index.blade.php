@@ -6,8 +6,9 @@
         Add Deposit
     </button>
 
-    <!-- Table to display deposits -->
-    <table class="table" id="deposit-table">
+    <div class="table table-responsive">
+        <!-- Table to display deposits -->
+    <table class="table table-bordered" id="deposit-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -20,6 +21,7 @@
         </thead>
   
     </table>
+    </div>
 
     <!-- Create Deposit Modal -->
     <div class="modal fade" id="createDepositModal" tabindex="1" role="dialog" aria-labelledby="createDepositModalLabel" aria-hidden="true">
@@ -75,6 +77,7 @@
 <script>
        $(document).ready(function() {
             $('#deposit-table').DataTable({
+                responsive: true,
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('deposits.index') }}",
