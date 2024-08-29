@@ -9,26 +9,16 @@ body {
         linear-gradient(rgba(207, 133, 13, 0.8), rgba(207, 133, 13, 0.8)),
         url('../../web/images/nepal/bikalpa-pokhrel-L4NA2qRqK0s-unsplash.jpg');
     background-size: cover;
-    /* Cover the entire sidebar */
     background-position: center;
-    /* Center the image */
     background-repeat: no-repeat;
-    /* Prevent the image from repeating */
     color: white;
-    /* Ensure text is readable on top of the image */
     height: 100%;
-    /* Make the sidebar full height */
     width: 250px;
-    /* Adjust the width of the sidebar as needed */
     position: fixed;
-    /* Keep the sidebar fixed */
-    top: 0;
-    /* Align the sidebar to the top */
+    top: 54px;
     left: 0;
-    /* Align the sidebar to the left */
     overflow-y: auto;
-    /* Allow vertical scrolling if content overflows */
-    padding-top: 20px;
+    /* padding-top: 20px; */
     z-index: 1000;
     transition: width 0.3s;
     transform: translateX(0);

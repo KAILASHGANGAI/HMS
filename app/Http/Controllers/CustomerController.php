@@ -175,11 +175,15 @@ class CustomerController extends Controller
                     if (is_null($customer->longitude) && is_null($customer->latitude)) {
                         $locationButton = '<button onclick="getLocation(' . $customer->id . ')" class="btn btn-primary btn-sm getLocationBtn" data-customer-id="' . $customer->id . '">
                     <i class="fa-solid fa-location-pin"></i></button>';
+                    }else{
+                        $locationButton = '<button onclick="showLocation(' . $customer->latitude . ',' . $customer->longitude . ')" class="btn btn-secondary btn-sm getLocationBtn" data-customer-id="' . $customer->id . '">
+                    GO</button>';
+                        
                     }
                     $cexp = route('customers.expenses', $customer->id);
                     $expenseButton = '<a href="' . $cexp . '" class="btn btn-danger btn-sm"><i class="fa-solid fa-money-bill-trend-up"></i> </a>';
 
-                    return $viewBtn . ' ' . $editButton . ' ' . $locationButton . ' ' . $expenseButton;
+                    return $viewBtn . ' ' . $editButton . ' ' .  $expenseButton. ' ' . $locationButton;
                 }
             })
             ->rawColumns(['phone', 'action']) // Ensure HTML is rendered

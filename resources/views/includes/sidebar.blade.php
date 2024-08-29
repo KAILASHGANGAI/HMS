@@ -1,6 +1,6 @@
 
 <div class="sidebar">
-    <h3 class="text-center sidebar-text">Travel Dashboard</h3>
+    <h3 class="text-center sidebar-text"> </h3>
     @if (auth()->user()->is_admin)
     <!-- Tours Dropdown in Sidebar -->
     <a href="#Deposits" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

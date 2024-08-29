@@ -1,23 +1,23 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-fluid ">
-      <div class="table table-responsive">
-        <table id="customer-table" class="display">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Status</th>
-                    <th>Follow Up Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+        <div class="table table-responsive">
+            <table id="customer-table" class="display">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Follow Up Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
 
-        </table>
-      </div>
+            </table>
+        </div>
     </div>
 @endsection
 
@@ -86,23 +86,50 @@
                 alert('Geolocation is not supported by this browser.');
             }
 
-            
+
 
         }
 
         function updateCustomer(id, data) {
-                $.ajax({
-                    url: '/customers-update/' + id,
-                    method: 'PUT',
-                    data: data,
-                    success: function(response) {
-                        console.log(response);
-                        // Optionally, update the UI to reflect the change
-                    },
-                    error: function(error) {
-                        console.error(error);
-                    }
-                });
+            $.ajax({
+                url: '/customers-update/' + id,
+                method: 'PUT',
+                data: data,
+                success: function(response) {
+                    console.log(response);
+                    // Optionally, update the UI to reflect the change
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
+
+
+        function showLocation(latitudeDes, longitudeDes) {
+            if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                // Replace with the destination coordinates
+                var destinationLatitude = latitudeDes;  // Example: New York City latitude
+                var destinationLongitude = longitudeDes; // Example: New York City longitude
+
+                // Construct the Google Maps URL for directions
+                var directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destinationLatitude},${destinationLongitude}&travelmode=driving`;
+
+                // Open the Google Maps URL in a new tab
+                window.open(directionsUrl, '_blank');
+            },
+            function(error) {
+                alert('Error getting location: ' + error.message);
             }
+        );
+    } else {
+        alert('Geolocation is not supported by this browser.');
+    }
+        }
     </script>
 @endsection
