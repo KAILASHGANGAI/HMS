@@ -74,9 +74,8 @@
 <body>
     <div class="signup-container">
         <div class="signup-box">
-            <h2 class="text-white fw-bold">Sign up for BREATHE DREAM GO DISPATCHES and get inspiration to live your
-                travel dreams.</h2>
-            <p class="text-white">Sign up now and get a free copy of SONG OF INDIA.</p>
+            <h2 class="text-white fw-bold">Log In</h2>
+       
             @error('password')
                 <span style="color: red;">{{ $message }}</span>
             @enderror
