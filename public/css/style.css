@@ -144,4 +144,10 @@ body {
         padding: 0;
         transition: margin-left 0.3s;
     }   
+    .dt-length label, .dt-search label {
+        display: none;
+    }
+    .dt-layout-row{
+        display: flex !important;
+    }
 }

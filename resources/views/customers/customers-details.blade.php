@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-fluid ">
-        <div class="  table-responsive">
-            <table id="customer-table" class="table tabe-striped">
+        <div class="table-responsive">
+            <table id="customer-table" class="table tabe-striped table-responsive">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -66,7 +66,10 @@
 
                     },
                 ],
-                responsive: true
+                responsive: true,
+                order: [
+                    [0, 'desc']
+                ]
             });
         });
 
