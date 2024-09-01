@@ -31,6 +31,8 @@
                     class="sidebar-text">Add Customer</span></a></li>
         <li><a href="{{ route('customers.index') }}" class="ms-4"><i class="fas fa-tasks"></i> <span
                     class="sidebar-text">Customer List</span></a></li>
+                    <li><a href="{{ route('runnungCustomer') }}" class="ms-4"><i class="fas fa-tasks"></i> <span
+                        class="sidebar-text">Running Sites List</span></a></li>      
 
 
     </ul>

@@ -123,9 +123,16 @@ body {
 }
 
 @media (max-width: 768px) {
-   
-    .sidebar.minimized {
-        width : 0px;
+    .sidebar {
+      display: none;
+    }
+    table, th, td ,tr{
+        font-size: 12px;
+        padding: 2px !important;
+        text-align: center;
+    }
+    .sidebar.minimized {    
+        width: 0;
     }
     .sidebar.minimized~.content {
         margin-left: 0;
@@ -134,7 +141,7 @@ body {
     .content {
         margin-top: 50px;
         margin-left: 0;
-        padding: 20px;
+        padding: 0;
         transition: margin-left 0.3s;
     }   
 }

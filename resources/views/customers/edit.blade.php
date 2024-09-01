@@ -33,6 +33,7 @@
                         <option value="giventime">Given Time</option>
                         <option value="needtofollow">Need to Follow</option>
                         <option value="providedestimate">Provided Estimate</option>
+                        <option value="runningsites">Running Sites</option>
                     </select>
                 </div>
 

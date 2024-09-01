@@ -17,14 +17,23 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $customers = Customer::select('id', 'name', 'phone', 'address', 'status', 'follow_up_date');
+            $customers = Customer::all();
             return  $this->getdata($customers);
         }
         $customers = Customer::all();
 
         return view('customers.index', compact('customers'));
     }
+    public function runnungCustomer(Request $request)
+    {
+        if ($request->ajax()) {
+            $customers = Customer::where('status', 'runningsites')->get();
+            return  $this->getdata($customers);
+        }
+        $customers = Customer::all();
 
+        return view('customers.running', compact('customers'));
+    }
     // Show the form for creating a new resource
     public function create()
     {
@@ -143,47 +152,58 @@ class CustomerController extends Controller
         return back()->with('success', 'Customer updated successfully.');
     }
 
-    public function getdata($customer)
+    public function getdata($customers)
     {
-        $customers = Customer::all();
+       
         return DataTables::of($customers)
             ->editColumn('phone', function ($customer) {
                 return '<a href="tel:' . $customer->phone . '">' . $customer->phone . '</a>';
             })
+            ->addColumn('assigned_to', function ($customer) {
+                return $customer->user->name;
+            })
             ->addColumn('action', function ($customer) {
-                $viewBtn = '<a href="' . route('customers.show', $customer->id) . '" class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i></a>';
+                $viewBtn = '<a href="' . route('customers.show', $customer->id) . '" class="btn btn-info btn-sm m-1"><i class="fa-solid fa-eye"></i></a>';
 
                 if (auth()->user()->is_admin) {
                     //edit and delete only 
                     $update = route('customers.edit', $customer->id);
-                    $editButton = '<a href="' . $update . '" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>';
+                    $editButton = '<a href="' . $update . '" class="btn btn-warning btn-sm m-1"><i class="fa-solid fa-pen-to-square"></i></a>';
 
                     $delete = '<form action="' . route('customers.destroy', $customer->id) . '" method="POST" style="display:inline;">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="' . csrf_token() . '">
-                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger btn-sm m-1"><i class="fa-solid fa-trash"></i></button>
                     </form>';
                     $cexp = route('customers.expenses', $customer->id);
-                    $expenseButton = '<a href="' . $cexp . '" class="btn btn-danger btn-sm"><i class="fa-solid fa-money-bill-trend-up"></i> </a>';
-
-                    return $viewBtn . ' ' . $editButton . ' ' . $delete. ' ' . $expenseButton;
-                } else {
-
-                    $editButton = '<a href="' . route('customers.sideupdate', $customer->id) . '"  class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>';
 
                     $locationButton = '';
                     if (is_null($customer->longitude) && is_null($customer->latitude)) {
-                        $locationButton = '<button onclick="getLocation(' . $customer->id . ')" class="btn btn-primary btn-sm getLocationBtn" data-customer-id="' . $customer->id . '">
+                        $locationButton = '<button onclick="getLocation(' . $customer->id . ')" class="btn btn-primary btn-sm m-1  getLocationBtn" data-customer-id="' . $customer->id . '">
                     <i class="fa-solid fa-location-pin"></i></button>';
-                    }else{
-                        $locationButton = '<button onclick="showLocation(' . $customer->latitude . ',' . $customer->longitude . ')" class="btn btn-secondary btn-sm getLocationBtn" data-customer-id="' . $customer->id . '">
+                    } else {
+                        $locationButton = '<button onclick="showLocation(' . $customer->latitude . ',' . $customer->longitude . ')" class="btn m-1 btn-secondary  btn-sm getLocationBtn" data-customer-id="' . $customer->id . '">
                     GO</button>';
-                        
+                    }
+                    $expenseButton = '<a href="' . $cexp . '" class="btn btn-danger btn-sm m-1 "><i class="fa-solid fa-money-bill-trend-up"></i> </a>';
+
+                    return $viewBtn . ' ' . $editButton . ' ' . $delete . ' ' . $expenseButton . ' ' . $locationButton;
+                } else {
+
+                    $editButton = '<a href="' . route('customers.sideupdate', $customer->id) . '"  class="btn btn-warning btn-sm m-1"><i class="fa-solid fa-pen-to-square"></i></a>';
+
+                    $locationButton = '';
+                    if (is_null($customer->longitude) && is_null($customer->latitude)) {
+                        $locationButton = '<button onclick="getLocation(' . $customer->id . ')" class="btn btn-primary btn-sm getLocationBtn m-1" data-customer-id="' . $customer->id . '">
+                    <i class="fa-solid fa-location-pin"></i></button>';
+                    } else {
+                        $locationButton = '<button onclick="showLocation(' . $customer->latitude . ',' . $customer->longitude . ')" class="btn btn-secondary  btn-sm getLocationBtn m-1" data-customer-id="' . $customer->id . '">
+                    GO</button>';
                     }
                     $cexp = route('customers.expenses', $customer->id);
-                    $expenseButton = '<a href="' . $cexp . '" class="btn btn-danger btn-sm"><i class="fa-solid fa-money-bill-trend-up"></i> </a>';
+                    $expenseButton = '<a href="' . $cexp . '" class="btn btn-danger btn-sm m-1 "><i class="fa-solid fa-money-bill-trend-up"></i> </a>';
 
-                    return $viewBtn . ' ' . $editButton . ' ' .  $expenseButton. ' ' . $locationButton;
+                    return $viewBtn . ' ' . $editButton . ' ' .  $expenseButton . ' ' . $locationButton;
                 }
             })
             ->rawColumns(['phone', 'action']) // Ensure HTML is rendered

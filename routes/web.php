@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('customers-update/{id}', [CustomerController::class, 'sideUpdate'])->name('customers.sideupdate');
     Route::get('customers-expenses/{id}', [CustomerController::class, 'expenses'])->name('customers.expenses');
     Route::put('customers-update/{id}', [CustomerController::class, 'cupdate'])->name('cupdate');
+    Route::get('customers-running', [CustomerController::class, 'runnungCustomer'])->name('runnungCustomer');
     Route::resource('expenses', ExpenseController::class);
     Route::resource('deposits', DepositeController::class);
     Route::resource('customer-expenses', CustomerExpenseController::class);

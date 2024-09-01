@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-fluid ">
-        <div class="  table-responsive">
+        <div class="table-responsive">
             <table id="customer-table" class="table tabe-striped">
                 <thead>
                     <tr>
@@ -28,7 +28,7 @@
             $('#customer-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('customers.index') }}",
+                ajax: "{{ route('runnungCustomer') }}",
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -115,28 +115,29 @@
 
         function showLocation(latitudeDes, longitudeDes) {
             if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
 
-                // Replace with the destination coordinates
-                var destinationLatitude = latitudeDes;  // Example: New York City latitude
-                var destinationLongitude = longitudeDes; // Example: New York City longitude
+                        // Replace with the destination coordinates
+                        var destinationLatitude = latitudeDes; // Example: New York City latitude
+                        var destinationLongitude = longitudeDes; // Example: New York City longitude
 
-                // Construct the Google Maps URL for directions
-                var directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destinationLatitude},${destinationLongitude}&travelmode=driving`;
+                        // Construct the Google Maps URL for directions
+                        var directionsUrl =
+                            `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destinationLatitude},${destinationLongitude}&travelmode=driving`;
 
-                // Open the Google Maps URL in a new tab
-                window.open(directionsUrl, '_blank');
-            },
-            function(error) {
-                alert('Error getting location: ' + error.message);
+                        // Open the Google Maps URL in a new tab
+                        window.open(directionsUrl, '_blank');
+                    },
+                    function(error) {
+                        alert('Error getting location: ' + error.message);
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by this browser.');
             }
-        );
-    } else {
-        alert('Geolocation is not supported by this browser.');
-    }
         }
     </script>
 @endsection

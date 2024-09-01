@@ -57,6 +57,7 @@
     <script>
         document.querySelector('.toggle-sidebar').addEventListener('click', function() {
             document.querySelector('.sidebar').classList.toggle('minimized');
+            document.querySelector('.sidebar').style.display = 'block';
         });
     </script>
     <script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
