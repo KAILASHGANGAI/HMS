@@ -160,7 +160,7 @@ class CustomerController extends Controller
                 return '<a href="tel:' . $customer->phone . '">' . $customer->phone . '</a>';
             })
             ->addColumn('assigned_to', function ($customer) {
-                return $customer->user->name;
+                return $customer->user->name ?? 'Not Assigned';
             })
             ->addColumn('action', function ($customer) {
                 $viewBtn = '<a href="' . route('customers.show', $customer->id) . '" class="btn btn-info btn-sm m-1"><i class="fa-solid fa-eye"></i></a>';
