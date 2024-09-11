@@ -24,16 +24,29 @@
                 <div class="form-group col-sm-6">
                     <label for="status">Select Status:</label>
                     <select id="status" class="form-control" name="status">
-                        <option value="notseen">Not Seen</option>
-                        <option value="contacted">Contacted</option>
-                        <option value="inprogress" selected>In Progress</option> <!-- Pre-selected option -->
-                        <option value="resolved">Resolved</option>
-                        <option value="fake">Fake</option>
-                        <option value="converted">Converted</option>
-                        <option value="giventime">Given Time</option>
-                        <option value="needtofollow">Need to Follow</option>
-                        <option value="providedestimate">Provided Estimate</option>
-                        <option value="runningsites">Running Sites</option>
+                        <option {{ $customer->status == 'notseen' ? 'selected' : '' }} value="notseen">Not
+                            Seen</option>
+                        <option {{ $customer->status == 'contacted' ? 'selected' : '' }} value="contacted">
+                            Contacted</option>
+                        <option {{ $customer->status == 'inprogress' ? 'selected' : '' }} value="inprogress"
+                            selected>In Progress</option>
+                        <!-- Pre-selected option -->
+                        <option {{ $customer->status == 'resolved' ? 'selected' : '' }} value="resolved">
+                            Resolved</option>
+                        <option {{ $customer->status == 'fake' ? 'selected' : '' }} value="fake">Fake
+                        </option>
+                        <option {{ $customer->status == 'converted' ? 'selected' : '' }} value="converted">
+                            Converted</option>
+                        <option {{ $customer->status == 'giventime' ? 'selected' : '' }} value="giventime">
+                            Given Time</option>
+                        <option {{ $customer->status == 'needtofollow' ? 'selected' : '' }}
+                            value="needtofollow">Need to Follow</option>
+                        <option {{ $customer->status == 'providedestimate' ? 'selected' : '' }}
+                            value="providedestimate">Provided Estimate</option>
+                        <option {{ $customer->status == 'highpriority' ? 'selected' : '' }}
+                            value="highpriority">High Priority</option>
+                        <option {{ $customer->status == 'outofcontact' ? 'selected' : '' }}
+                            value="outofcontact">Out of Contact</option>
                     </select>
                 </div>
 

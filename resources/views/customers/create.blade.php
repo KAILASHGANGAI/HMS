@@ -32,7 +32,8 @@
                         <option value="needtofollow">Need to Follow</option>
                         <option value="providedestimate">Provided Estimate</option>
                         <option value="runningsites">Running Sites</option>
-
+                        <option value="highpriority">High Priority</option>
+                        <option value="outofcontact">Out of Contact</option>
                     </select>
                     
                 </div>  
