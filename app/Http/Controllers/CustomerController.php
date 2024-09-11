@@ -159,8 +159,9 @@ class CustomerController extends Controller
             ->editColumn('phone', function ($customer) {
                 return '<a href="tel:' . $customer->phone . '">' . $customer->phone . '</a>';
             })
-            ->addColumn('assigned_to', function ($customer) {
-                return $customer->user->name ?? 'Not Assigned';
+            ->editColumn('status', function ($customer) {
+                $high = '<span class="badge bg-danger">High Priority</span>';
+                return $customer->status == 'highpriority' ? $high : $customer->status;
             })
             ->addColumn('action', function ($customer) {
                 $viewBtn = '<a href="' . route('customers.show', $customer->id) . '" class="btn btn-info btn-sm m-1"><i class="fa-solid fa-eye"></i></a>';
@@ -206,7 +207,7 @@ class CustomerController extends Controller
                     return $viewBtn . ' ' . $editButton . ' ' .  $expenseButton . ' ' . $locationButton;
                 }
             })
-            ->rawColumns(['phone', 'action']) // Ensure HTML is rendered
+            ->rawColumns(['phone', 'action', 'status']) // Ensure HTML is rendered
             ->make(true);
     }
 }

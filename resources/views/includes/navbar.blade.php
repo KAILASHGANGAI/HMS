@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar- bg- fixed-top">
     <div class="container-fluid">
         <span class="toggle-sidebar text-white">&#9776;</span>
-        <a class="navbar-brand ms-3" href="#">HomePlex</a>
+        <a class="navbar-brand ms-3" href="#">HomePlex</a> 
+        <a href="javascript:location.reload()" class="btn btn-secondary">Refresh</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

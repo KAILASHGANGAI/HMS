@@ -7,10 +7,10 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Assign</th>
+                        <th>Status</th>
+                        <th>Problem</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        <th>Status</th>
                         <th>VisitDate</th>
                         <th>Actions</th>
                     </tr>
@@ -38,8 +38,12 @@
                         name: 'name'
                     },
                     {
-                        data: 'assigned_to',
-                        name: 'assigned_to'
+                        data: 'status',
+                        name: 'status',
+                    },
+                    {
+                        data: 'problem',
+                        name: 'problem',
                     },
                     {
                         data: 'phone',
@@ -49,10 +53,7 @@
                         data: 'address',
                         name: 'address'
                     },
-                    {
-                        data: 'status',
-                        name: 'status'
-                    },
+
                     {
                         data: 'follow_up_date',
                         name: 'follow_up_date'
@@ -75,29 +76,35 @@
 
 
         function getLocation(id) {
+            // Show confirmation alert
+            var confirmAction = confirm("Are you sure you want to update the customer's location?");
 
-            var customerId = id;
+            if (confirmAction) {
+                var customerId = id;
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
 
-                    updateCustomer(customerId, {
-                        longitude: longitude,
-                        latitude: latitude,
-                        _token: '{{ csrf_token() }}'
+                        updateCustomer(customerId, {
+                            longitude: longitude,
+                            latitude: latitude,
+                            _token: '{{ csrf_token() }}'
+                        });
+
+                        // Reload the page after updating
+                        window.location.reload();
+                    }, function(error) {
+                        alert('Error getting location: ' + error.message);
                     });
-                    window.location.reload();
-                }, function(error) {
-                    alert('Error getting location: ' + error.message);
-                });
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                }
             } else {
-                alert('Geolocation is not supported by this browser.');
+                // Action was cancelled
+                alert('Action canceled.');
             }
-
-
-
         }
 
         function updateCustomer(id, data) {
@@ -118,28 +125,29 @@
 
         function showLocation(latitudeDes, longitudeDes) {
             if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
 
-                // Replace with the destination coordinates
-                var destinationLatitude = latitudeDes;  // Example: New York City latitude
-                var destinationLongitude = longitudeDes; // Example: New York City longitude
+                        // Replace with the destination coordinates
+                        var destinationLatitude = latitudeDes; // Example: New York City latitude
+                        var destinationLongitude = longitudeDes; // Example: New York City longitude
 
-                // Construct the Google Maps URL for directions
-                var directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destinationLatitude},${destinationLongitude}&travelmode=driving`;
+                        // Construct the Google Maps URL for directions
+                        var directionsUrl =
+                            `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destinationLatitude},${destinationLongitude}&travelmode=driving`;
 
-                // Open the Google Maps URL in a new tab
-                window.open(directionsUrl, '_blank');
-            },
-            function(error) {
-                alert('Error getting location: ' + error.message);
+                        // Open the Google Maps URL in a new tab
+                        window.open(directionsUrl, '_blank');
+                    },
+                    function(error) {
+                        alert('Error getting location: ' + error.message);
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by this browser.');
             }
-        );
-    } else {
-        alert('Geolocation is not supported by this browser.');
-    }
         }
     </script>
 @endsection
