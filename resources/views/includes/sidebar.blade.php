@@ -59,8 +59,15 @@
                     class="sidebar-text">Contractors List </span></a></li>
     </ul>
     @else
-    <a href="#" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-route"></i> <span class="sidebar-text">Your Custoers List</span>
+
+    
+    <a href="{{ route('myCustomers') }}" >
+        <i class="fas fa-route"></i> <span class="sidebar-text">My Custoers List</span>
     </a>
+    <a href="{{ route('customers.index') }}" >
+        <i class="fas fa-route"></i> <span class="sidebar-text">All Custoers List</span>
+    </a>
+
+
     @endif
 </div>

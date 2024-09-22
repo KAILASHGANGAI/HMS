@@ -24,6 +24,14 @@ class CustomerController extends Controller
 
         return view('customers.index', compact('customers'));
     }
+
+    public function myCustomers(Request $request){
+       if ($request->ajax()) {
+        $customers = Customer::where('user_id',auth()->user()->id)->get();
+        return  $this->getdata($customers);
+       }
+       return view('customers.mycustomers');
+    }
     public function runnungCustomer(Request $request)
     {
         if ($request->ajax()) {

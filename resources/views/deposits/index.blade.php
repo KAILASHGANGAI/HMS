@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label for="receipt">Receipt </label>
-                            <input type="file" name="image" class="form-control" value="" required>
+                            <input type="file" name="image" class="form-control" value="" >
                         </div>
                         <div class="form-group">
                             <label for="note">Note</label>

@@ -25,7 +25,7 @@ class AdminController extends Controller
             ));
         }else{
             
-            return view('customers.customers-details',);
+            return view('customers.mycustomers',);
         }
     }
 }

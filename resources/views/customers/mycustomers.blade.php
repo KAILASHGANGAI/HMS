@@ -29,7 +29,7 @@
             $('#customer-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('customers.index') }}",
+                ajax: "{{ route('myCustomers') }}",
                 columns: [{
                         data: 'id',
                         name: 'id'
